@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
@@ -33,9 +34,9 @@ public class TopicosController {
     private CursoRepository cursoRepository;
 
     @GetMapping //@requestParam é um paramentro de url, spring considera que é obrigatório.
-    public Page<TopicoDto> lista(@RequestParam (required = false) String nomeCurso, @RequestParam int pagina, @RequestParam int qtd) {
-        //colocar paginacao
-        Pageable paginacao = PageRequest.of(pagina, qtd);
+    public Page<TopicoDto> lista(@RequestParam (required = false) String nomeCurso, Pageable paginacao) {
+        //Ao utilizar o objeto Page, além de devolver os registros, o Spring também devolve informações sobre paginação
+        //@PageableDefault pode ser usado quando cliente da API nao enviar informacoes
 
         if (nomeCurso == null) {
 
@@ -47,7 +48,7 @@ public class TopicosController {
         }
     }
 
-    @PostMapping//@requesbody Indicar ao Spring que os parâmetros enviados no corpo da requisição devem ser atribuídos ao parâmetro do método
+    @PostMapping//@requesbody Indica ao Spring que os parâmetros enviados no corpo da requisição devem ser atribuídos
     public ResponseEntity<TopicoDto> cadastrar(@RequestBody @Valid TopicoForm form, UriComponentsBuilder uriBuilder) {
 
     Topico topico = form.converter(cursoRepository);
@@ -73,7 +74,7 @@ public class TopicosController {
 
 
     @PutMapping("/{id}")
-    @Transactional //Ao finalizar o método, o Spring efetuará o commit automático da transação, caso nenhuma exception tenha sido lançada.
+    @Transactional //Ao finalizar, efetuará o commit automático da transação, caso nenhuma exception tenha sido lançada.
     public ResponseEntity<TopicoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoTopicoForm form){
 
         Optional <Topico> optional = topicoRepository.findById(id);
