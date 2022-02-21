@@ -8,6 +8,9 @@ import com.about.forum.Controler.Form.TopicoForm.TopicoForm;
 import com.about.forum.Controler.dto.DetalhesDoTopocoDto;
 import com.about.forum.Repository.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
@@ -29,13 +32,17 @@ public class TopicosController {
     @Autowired
     private CursoRepository cursoRepository;
 
-    @GetMapping
-    public List<TopicoDto> lista(String nomeCurso) {
+    @GetMapping //@requestParam é um paramentro de url, spring considera que é obrigatório.
+    public Page<TopicoDto> lista(@RequestParam (required = false) String nomeCurso, @RequestParam int pagina, @RequestParam int qtd) {
+        //colocar paginacao
+        Pageable paginacao = PageRequest.of(pagina, qtd);
+
         if (nomeCurso == null) {
-            List<Topico> topicos = topicoRepository.findAll();
+
+            Page<Topico> topicos = topicoRepository.findAll(paginacao);
             return TopicoDto.converter(topicos);
         } else {
-            List<Topico> topicos = topicoRepository.findByCursoNome(nomeCurso);
+            Page<Topico> topicos = topicoRepository.findByCursoNome(nomeCurso, paginacao);
             return TopicoDto.converter(topicos);
         }
     }
