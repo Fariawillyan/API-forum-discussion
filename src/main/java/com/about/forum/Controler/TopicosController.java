@@ -7,6 +7,7 @@ import com.about.forum.Controler.Form.TopicoForm.TopicoForm;
 import com.about.forum.Controler.dto.DetalhesDoTopocoDto;
 import com.about.forum.Repository.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,11 +28,13 @@ import javax.validation.Valid;
  * # @RequestParam é um paramentro de url, spring considera que é obrigatório.
  * # @PageableDefault pode ser usado quando cliente da API nao enviar informacoes.
  * # Page ---> Ao utilizar o objeto Page, além de devolver os registros, o Spring devolve informações sobre paginação
- * # @Requesbody ----> Indica ao Spring que os parâmetros enviados no corpo da requisição devem ser atribuídos. *
+ * # @Requesbody ----> Indica ao Spring que os parâmetros enviados no corpo da requisição devem ser atribuídos.
  * # URI uri ----> Que a boa prática para métodos que cadastram informações é devolver o código HTTP 201, "created"
  * ao invés do código 200;
  * # Optional ----> para verificar a entrada do usuario e depois retornar 404 caso nao encontrar.
- * # @Transactional ---> Ao finalizar, efetuará o commit automático, caso nenhuma exception tenha sido lançada. *
+ * # @Transactional ---> Ao finalizar, efetuará o commit automático, caso nenhuma exception tenha sido lançada.
+ * # @Cacheable(value = "listaDeTopicos")---> Usa-se em coisas estáveis, como tabelas, que não sofrem atualizações
+ * # @CacheEvict(value = "listaDeTopicos", allEntries = true) ---> Iavalida e limpa o cache, sofre atualização.
  */
 
 @RestController
@@ -58,6 +61,7 @@ public class TopicosController {
     }
 
     @PostMapping
+    @CacheEvict(value = "listaDeTopicos", allEntries = true)
     public ResponseEntity<TopicoDto> cadastrar(@RequestBody @Valid TopicoForm form, UriComponentsBuilder uriBuilder) {
 
         Topico topico = form.converter(cursoRepository);
@@ -79,6 +83,7 @@ public class TopicosController {
 
     @PutMapping("/{id}")
     @Transactional
+    @CacheEvict(value = "listaDeTopicos", allEntries = true)
     public ResponseEntity<TopicoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoTopicoForm form) {
 
         Optional<Topico> optional = topicoRepository.findById(id);
@@ -90,6 +95,7 @@ public class TopicosController {
     }
 
     @DeleteMapping("/{id}")
+    @CacheEvict(value = "listaDeTopicos", allEntries = true)
     public ResponseEntity<?> remover(@PathVariable Long id) {
 
         Optional<Topico> optional = topicoRepository.findById(id);
