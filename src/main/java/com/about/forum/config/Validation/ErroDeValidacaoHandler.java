@@ -1,4 +1,4 @@
-package com.about.forum.Validation;
+package com.about.forum.config.Validation;
 
 import java.util.ArrayList;
 import java.util.List;
