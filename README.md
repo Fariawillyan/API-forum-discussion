@@ -3,10 +3,10 @@
 
 ## 🚀 API com CRUD
 
-Api criada para simular um forum de discussões com springboot para facilitar as configurações de acesso ao server e DB.
-Para acessar a lista do forum pasta entrar localhost:8080/topicos e para acessar a tela
+Api criada para simular um fórum de discussões com springboot para facilitar as configurações de acesso ao server e DB.
+Para acessar a lista do forum pasta entrar localhost:8080/topicos. Para acessar a tela
 de login basta rodar a aplicação e acessar localhost:8080. Os testes de GET, PUT, UPDATE, DELETE, 
-pode ser testado com o Postman.
+podem ser testado com o Postman.
 
 ## 🛠️ Tecnologias usadas:
 
