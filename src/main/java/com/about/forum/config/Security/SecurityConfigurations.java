@@ -5,13 +5,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.boot.autoconfigure.webservices.WebServicesAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
@@ -23,8 +26,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  *
  *
  * # 2 HttpSecurity ----> configuracao de autorizacao
- * ()
- *
+ * # csrf().disable() ---> disabilitar para evitar tipos de ataque hacker
+ * # SessionCreationPolicy.STATELESS ----> representa um servico e nao guarda informacoes.
  *
  * # 3 WebSecurity ----> configuracao de recursos estaticos(js, css, imagens e etc...)
  * ()
@@ -38,6 +41,14 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
     @Autowired
     private AutenticacaoService AutenticacaoService;
 
+    @Override
+    @Bean
+    protected AuthenticationManager authenticationManager() throws Exception {
+        return super.authenticationManager();
+    }
+
+
+
     @Override //1
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(AutenticacaoService).passwordEncoder(new BCryptPasswordEncoder());
@@ -48,8 +59,10 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/topicos").permitAll()
                 .antMatchers(HttpMethod.GET,"/topicos/*").permitAll()
+                .antMatchers(HttpMethod.POST,"/auth").permitAll()
                 .anyRequest().authenticated()
-                .and().formLogin();
+                .and().csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
     @Override //3

@@ -17,6 +17,7 @@ podem ser testado com o Postman.
 - Spring Security
 - Spring Data
 - Spring Cache
+- JJWT
 - Postman
 - Banco de dados em memória H2 hibernate
 
