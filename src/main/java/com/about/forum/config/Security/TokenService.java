@@ -4,6 +4,7 @@ package com.about.forum.config.Security;
 import java.util.Date;
 
 import com.about.forum.Model.Usuario;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -33,4 +34,17 @@ public class TokenService {
                 .compact();
     }
 
+    public boolean isTokenValido(String token) {
+        try {
+            Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    public Long getIdUsuario(String token) {
+       Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
+       return Long.parseLong(claims.getSubject());
+    }
 }
