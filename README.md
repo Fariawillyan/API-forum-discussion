@@ -5,7 +5,8 @@
 
 Api criada para simular um fórum de discussões com springboot para facilitar as configurações de acesso ao server e DB.
 Para acessar a lista do forum pasta entrar localhost:8080/topicos. Os testes de GET, PUT, UPDATE, DELETE, 
-podem ser testado com o Postman.
+podem ser testado com o Postman. Para executar o adminMonitor basta baixar o arquivo .zip e abrir como um novo projeto(import).
+Para mostrar o painel Admin basta acessar o endereço localhost:8081 .
 
 ## 🛠️ Tecnologias usadas:
 
