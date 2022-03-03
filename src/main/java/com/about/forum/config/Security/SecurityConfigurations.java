@@ -18,6 +18,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 /**
@@ -69,15 +70,24 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/topicos/*").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth").permitAll()
                 .antMatchers(HttpMethod.GET,"/actuator/**").permitAll()
-                .anyRequest().authenticated()
-                .and().csrf().disable()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .csrf()
+                .disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, UsuarioRepository), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override //3
     public void configure(WebSecurity web) throws Exception{
-
+        web.ignoring().antMatchers(
+                "/v2/api-docs",
+                "/configuration/ui",
+                "/swagger-resources/**",
+                "/configuration/**",
+                "/swagger-ui.html",
+                "/webjars/**");
     }
 
 /*

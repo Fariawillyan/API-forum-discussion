@@ -4,22 +4,25 @@
 ## 🚀 API com CRUD
 
 Api criada para simular um fórum de discussões com springboot para facilitar as configurações de acesso ao server e DB.
-Para acessar a lista do forum pasta entrar localhost:8080/topicos. Os testes de GET, PUT, UPDATE, DELETE, 
-podem ser testado com o Postman. Para executar o adminMonitor basta baixar o arquivo .zip e abrir como um novo projeto(import).
-Para mostrar o painel Admin basta acessar o endereço localhost:8081 .
+Para acessar a lista do forum basta entrar no endereço http://localhost:8080/topicos. Os testes de GET, PUT, UPDATE, DELETE, 
+podem ser testado com o Postman. Baixe o arquivo adminMonitor.zip para criar um novo projeto(import).
+Para mostrar o painel Admin basta executar o AdminMonitor e acessar o endereço na pagina http://localhost:8081 .
+A documentação estará disponível com o swagger no endereço http://localhost:8080/swagger-ui.html#/.
+- Obs: O server da aplicação forum deve estar ON para o adminMonitor e swagger funcionar.
 
 ## 🛠️ Tecnologias usadas:
 
 - JAVA 11
 - IDE Intellij
 - MAVEN
-- Spring Boot
+- Spring Boot v2.5.9
 - Spring Security
 - Spring Data
 - Spring Cache
 - Spring Boot Actuator
-- Spring Boot Admin
-- JJWT
+- Spring Boot Admin v2.6.2
+- Spring Fox v2.9.2
+- JJWT v0.9.1
 - Postman
 - Banco de dados em memória H2 hibernate
 
