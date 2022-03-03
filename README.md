@@ -9,13 +9,15 @@ podem ser testado com o Postman.
 
 ## 🛠️ Tecnologias usadas:
 
-- Linguagem JAVA
+- JAVA 11
 - IDE Intellij
 - MAVEN
 - Spring Boot
 - Spring Security
 - Spring Data
 - Spring Cache
+- Spring Boot Actuator
+- Spring Boot Admin
 - JJWT
 - Postman
 - Banco de dados em memória H2 hibernate
