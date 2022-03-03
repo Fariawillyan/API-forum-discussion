@@ -3,28 +3,29 @@
 
 ## 🚀 API com CRUD
 
-Api Rest criada com JAVA para simular um fórum de discussões. Desenvolvido com springboot para facilitar as configurações para acesso ao server e DB.
-Para acessar a lista do forum basta entrar no endereço http://localhost:8080/topicos. Os testes de GET, PUT, UPDATE, DELETE, 
-podem ser testado com o Postman ou swagger. Baixe o arquivo adminMonitor.zip para criar um novo projeto(import).
-Para mostrar o painel Admin basta executar o AdminMonitor e acessar o endereço na pagina http://localhost:8081 .
-A documentação estará disponível com o swagger no endereço http://localhost:8080/swagger-ui.html#/.
-- Obs: O server da aplicação forum deve estar ON para o adminMonitor e swagger funcionar.
-- Há um arquivo duvidas.md com informações adicionais.
+Api Rest criada com JAVA para simular um fórum de discussões. Desenvolvido com springboot para facilitar às configurações para acesso ao server e DB.
+Para acessar a lista do fórum basta entrar no endereço http://localhost:8080/topicos. Os testes de GET, PUT, UPDATE, DELETE, 
+podem ser testados com o Postman ou swagger. Baixe o arquivo adminMonitor.zip para criar um novo projeto(import).
+Para exibir o painel Admin, basta executar o AdminMonitor e acessar o endereço na pagina http://localhost:8081 .
+A documentação estará disponível com o swagger, no endereço http://localhost:8080/swagger-ui.html#/.
+- Obs: O server da aplicação fórum deve estar ON para o adminMonitor e swagger funcionar.
+- Há um arquivo dúvidas.md com informações adicionais.
 
 ## 🛠️ Tecnologias usadas:
 
 - JAVA 11
-- IDE Intellij
+- IntelliJ IDEA 2021.3.2 (Ultimate Edition)
 - MAVEN
 - Spring Boot v2.5.9
 - Spring Security
 - Spring Data
 - Spring Cache
+- Spring JPA
 - Spring Boot Actuator
 - Spring Boot Admin v2.6.2
 - Spring Fox v2.9.2
 - JJWT v0.9.1
-- Postman
+- Postman v9.14.8
 - Banco de dados em memória H2 hibernate
 
 ## 🖇️ Colaborando
