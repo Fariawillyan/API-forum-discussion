@@ -21,3 +21,11 @@ spring.mvc.pathmatch.matching-strategy=ant_path_matcher
 Obs: Essa solução é incompatível com o módulo do Actuator, sendo que ao adicionar o actuator no projeto, 
 o mesmo erro voltará a ocorrer. Para utilizar o Actuator em conjunto com o Springfox Swagger será necessário
 então realizar o downgrade do Spring Boot para alguma versão anterior à versão 2.6.
+
+- Para documentar a nossa API Rest, podemos utilizar o Swagger, com o módulo SpringFox Swagger;
+- Para utilizar o SpringFox Swagger na API, devemos adicionar suas dependências no arquivo pom.xml;
+- Para habilitar o Swagger na API, devemos adicionar a anotação @EnableSwagger2 na classe ForumApplication;
+- As configurações do Swagger devem ser feitas criando-se uma classe chamada SwaggerConfigurations e adicionando nela a anotação @Configuration;
+- Para configurar quais endpoints e pacotes da API o Swagger deve gerar a documentação, devemos criar um método anotado com @Bean, que devolve um objeto do tipo Docket;
+- Para acessar a documentação da API, devemos entrar no endereço http://localhost:8080/swagger-ui.html;
+- Para liberar acesso ao Swagger no Spring Security, devemos chamar o seguinte método web.ignoring().antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**", "/swagger-resources/**"), dentro do método void configure(WebSecurity web), que está na classe SecurityConfigurations.
