@@ -1,16 +1,14 @@
 package com.about.forum.Controler.dto;
 
-import com.about.forum.Model.Resposta;
 import com.about.forum.Model.StatusTopico;
 import com.about.forum.Model.Topico;
-import jdk.jshell.Snippet;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DetalhesDoTopocoDto {
+public class DetalhesDoTopicoDto {
 
     private  Long id;
     private  String titulo;
@@ -20,7 +18,7 @@ public class DetalhesDoTopocoDto {
     private StatusTopico status;
     private List<RespostaDto> respostas;
 
-    public DetalhesDoTopocoDto(Topico topico){
+    public DetalhesDoTopicoDto(Topico topico){
         this.id = topico.getId();
         this.titulo = topico.getTitulo();
         this.mensagem = topico.getMensagem();

@@ -4,7 +4,7 @@ import java.net.URI;
 import java.util.Optional;
 import com.about.forum.Controler.Form.TopicoForm.AtualizacaoTopicoForm;
 import com.about.forum.Controler.Form.TopicoForm.TopicoForm;
-import com.about.forum.Controler.dto.DetalhesDoTopocoDto;
+import com.about.forum.Controler.dto.DetalhesDoTopicoDto;
 import com.about.forum.Repository.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -72,11 +72,11 @@ public class TopicosController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DetalhesDoTopocoDto> detalhar(@PathVariable Long id) {
+    public ResponseEntity<DetalhesDoTopicoDto> detalhar(@PathVariable Long id) {
 
         Optional<Topico> topico = topicoRepository.findById(id);
         if (topico.isPresent()) {
-            return ResponseEntity.ok(new DetalhesDoTopocoDto(topico.get()));
+            return ResponseEntity.ok(new DetalhesDoTopicoDto(topico.get()));
         }
         return ResponseEntity.notFound().build();
     }
